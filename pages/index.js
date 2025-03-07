@@ -1,18 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 
 export default function Home() {
+  useEffect(() => {
+    const smoothScroll = (event) => {
+      event.preventDefault();
+      const targetId = event.currentTarget.getAttribute("href").substring(1);
+      const targetElement = document.getElementById(targetId);
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop - 80,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    document.querySelectorAll("nav a").forEach((link) => {
+      link.addEventListener("click", smoothScroll);
+    });
+  }, []);
+
   return (
     <div className="bg-black text-white font-light">
       {/* Navbar */}
       <nav className="fixed top-0 left-0 w-full bg-transparent backdrop-blur-lg z-50 py-6 px-12 flex justify-between items-center">
         <h1 className="text-3xl font-extrabold tracking-wide uppercase">Vogue Essence</h1>
         <ul className="flex space-x-8 text-lg">
-          <li><Link href="#about" className="hover:text-gray-400 transition duration-300">About</Link></li>
-          <li><Link href="#collections" className="hover:text-gray-400 transition duration-300">Collections</Link></li>
-          <li><Link href="#contact" className="hover:text-gray-400 transition duration-300">Contact</Link></li>
+          <li><a href="#about" className="hover:text-gray-400 transition duration-300">About</a></li>
+          <li><a href="#collections" className="hover:text-gray-400 transition duration-300">Collections</a></li>
+          <li><a href="#contact" className="hover:text-gray-400 transition duration-300">Contact</a></li>
         </ul>
       </nav>
       
@@ -93,6 +111,24 @@ export default function Home() {
           ))}
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="py-16 bg-gray-900 text-center text-gray-400">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
+        >
+          <h2 className="text-4xl font-bold text-white">Vogue Essence</h2>
+          <p className="mt-4 text-lg">Redefining Luxury Fashion.</p>
+          <div className="flex justify-center space-x-6 mt-6">
+            <Link href="#" className="hover:text-white transition duration-300">Instagram</Link>
+            <Link href="#" className="hover:text-white transition duration-300">Twitter</Link>
+            <Link href="#" className="hover:text-white transition duration-300">Facebook</Link>
+          </div>
+          <p className="mt-6 text-sm">© {new Date().getFullYear()} Vogue Essence. All Rights Reserved.</p>
+        </motion.div>
+      </footer>
     </div>
   );
 }
