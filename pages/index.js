@@ -28,6 +28,13 @@ export default function Home() {
     { src: "/sg3.png", name: "Celestial Beauty", description: "Inspired by celestial wonders, this dress exudes luxury and class." },
     { src: "/sg4.png", name: "Modern Majesty", description: "A bold statement piece that redefines contemporary fashion." }
   ];
+  const timelineDetails = {
+    "1980": "Vogue Essence was founded in a small Parisian atelier, dedicated to crafting bespoke designs for the elite.",
+    "1995": "A breakthrough year as our designs took center stage at Milan Fashion Week, redefining couture fashion trends.",
+    "2005": "Expanding globally, we became the go-to brand for elite celebrities and luxury clients.",
+    "2015": "A milestone was achieved with the opening of our flagship store in the heart of New York City.",
+    "2023": "Leading the industry with innovation, sustainability, and modern fashion technology."
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -99,15 +106,10 @@ export default function Home() {
       </section>
       
 
-      {/* About Us Section */}
-      <section id="about" className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden px-12">
-        <video
-          autoPlay
-          loop
-          muted
-          className="absolute top-0 left-0 w-full h-full object-cover brightness-100 contrast-110"
-          src="/about-video.mp4"
-        ></video>
+
+
+        {/* About Us Section */}
+        <section id="about" className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden px-12 bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         <div className="relative z-10 px-10 backdrop-blur-md">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -128,7 +130,7 @@ export default function Home() {
         </div>
         
         {/* Subtle Animated Timeline */}
-        <div className="relative mt-6 w-full max-w-3xl text-left z-10">
+        <div className="relative mt-6 w-full max-w-3xl text-left z-10 pb-20">
           {[
             { year: "1980", event: "Founded in a Parisian atelier, crafting bespoke designs." },
             { year: "1995", event: "Revolutionized couture at Milan Fashion Week." },
@@ -141,7 +143,7 @@ export default function Home() {
               initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: index * 0.3 }}
-              className="mb-6 border-l-4 border-gray-400 pl-6"
+              className="mb-6 border-l-4 border-gray-500 pl-6"
             >
               <span className="text-3xl font-bold text-gray-100">{item.year}</span>
               <p className="text-xl text-gray-300">{item.event}</p>
@@ -149,8 +151,8 @@ export default function Home() {
           ))}
         </div>
         
-        {/* Rolling Text Animation - Integrated and Vibrant */}
-        <div className="absolute top-[85%] w-full overflow-hidden whitespace-nowrap z-10">
+        {/* Rolling Text Animation - Adjusted Position */}
+        <div className="absolute bottom-6 w-full overflow-hidden whitespace-nowrap z-10">
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: "-100%" }}
@@ -162,7 +164,6 @@ export default function Home() {
         </div>
       </section>
 
-  
             {/* Signature Pieces Section */}
         <section id="collections" className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden px-12">
         <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/dark-aesthetic-bg.jpg')", filter: "brightness(60%)" }}></div>
