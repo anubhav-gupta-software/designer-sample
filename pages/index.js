@@ -20,15 +20,19 @@ export default function Home() {
       link.addEventListener("click", smoothScroll);
     });
   }, []);
-
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const dresses = ["/sg1.png", "/sg2.png", "/sg3.png", "/sg4.png"];
-
   //added this differently for signature pieces
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const dresses = [
+    { src: "/sg1.png", name: "Ethereal Elegance", description: "A stunning couture gown with intricate embroidery and a flowing silhouette." },
+    { src: "/sg2.png", name: "Timeless Grace", description: "An exquisite piece that blends vintage charm with modern sophistication." },
+    { src: "/sg3.png", name: "Celestial Beauty", description: "Inspired by celestial wonders, this dress exudes luxury and class." },
+    { src: "/sg4.png", name: "Modern Majesty", description: "A bold statement piece that redefines contemporary fashion." }
+  ];
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % dresses.length);
-    }, 3000); // Change every 3 seconds
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
@@ -41,7 +45,7 @@ export default function Home() {
         <ul className="flex space-x-8 text-lg">
           <li><a href="#about" className="hover:text-gray-400 transition duration-300">About</a></li>
           <li><a href="#collections" className="hover:text-gray-400 transition duration-300">Collections</a></li>
-          <li><a href="#contact" className="hover:text-gray-400 transition duration-300">Contact</a></li>
+          <li><a href="#footer" className="hover:text-gray-400 transition duration-300">Contact</a></li>
         </ul>
       </nav>
       
@@ -71,7 +75,7 @@ export default function Home() {
           >
             A fusion of contemporary and classic aesthetics, crafted to perfection.
           </motion.p>
-          <motion.button
+          <motion.button 
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 1 }}
@@ -159,16 +163,9 @@ export default function Home() {
       </section>
 
   
-
-       {/* Signature Pieces Section */}
-       <section id="collections" className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden px-12">
-        <video
-          autoPlay
-          loop
-          muted
-          className="absolute top-0 left-0 w-full h-full object-cover brightness-90 contrast-120"
-          src="/signature-pieces.mp4"
-        ></video>
+            {/* Signature Pieces Section */}
+        <section id="collections" className="relative h-screen flex flex-col justify-center items-center text-center overflow-hidden px-12">
+        <div className="absolute top-0 left-0 w-full h-full bg-cover bg-center" style={{ backgroundImage: "url('/dark-aesthetic-bg.jpg')", filter: "brightness(60%)" }}></div>
         <div className="relative z-10 px-10 backdrop-blur-md p-8 rounded-lg">
           <motion.h1
             initial={{ opacity: 0, y: -20 }}
@@ -191,9 +188,9 @@ export default function Home() {
           {dresses.map((dress, index) => (
             <motion.img
               key={index}
-              src={dress}
-              alt={`Signature Dress ${index + 1}`}
-              className="absolute w-[40%] h-auto object-contain rounded-lg shadow-xl"
+              src={dress.src}
+              alt={dress.name}
+              className="absolute w-[40%] h-auto object-contain rounded-lg shadow-xl cursor-pointer"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={index === currentIndex ? { opacity: 1, scale: 1.1 } : { opacity: 0, scale: 0.8 }}
               transition={{ duration: 1 }}
@@ -201,6 +198,7 @@ export default function Home() {
           ))}
         </div>
       </section>
+
 
 
       {/* This section below looked better as it cut through the text, just check this once*/}
@@ -248,7 +246,7 @@ export default function Home() {
 
 
       {/* Footer */}
-      <footer className="py-16 bg-gray-900 text-center text-gray-400">
+      <footer id = "footer" className="py-16 bg-gray-900 text-center text-gray-400">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
